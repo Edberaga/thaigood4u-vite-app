@@ -1,20 +1,32 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import ListData from './components/Affliate/ListData'
+import { Navigate, Route, Router, Routes } from 'react-router-dom'
+
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebase';
+import Login from './components/login';
+import Header from './components/Header';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user] = useAuthState(auth);
+
+  {/*const RequireAuth = ({children}) => {
+    return user ? (children) : <Navigate to="/login"/>
+  };*/}
 
   return (
     <>
-      <div className="App">
-      <header className="App-header">
-        <h2>Thaigoo4u Affliate Program</h2>
-        <ListData/>
-      </header>
-    </div>
+    <Header/>
+    <main className="App">
+        <Routes>
+          <Route path='/login' element={<Login/>}/>
+          <Route >
+            <Route path='/' element={<ListData/>}/>
+          </Route>
+        </Routes>
+    </main>
     </>
   )
 }
