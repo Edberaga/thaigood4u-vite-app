@@ -2,6 +2,7 @@ import { CarryOutOutlined, CheckOutlined, FormOutlined } from '@ant-design/icons
 import { Select, Switch, Tree } from 'antd';
 import { useState } from 'react';
 
+
 const treeData = [
   {
     title: 'Jackson034 (JACKSONTHAI9062023)',
@@ -22,7 +23,6 @@ const treeData = [
             title: (
               <>
                 <div>Thomson (THOMSON12302023)</div>
-                
               </>
             ),
             key: '0-0-0-1',
@@ -100,25 +100,10 @@ const ListData = () => {
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   };
-  const handleLeafIconChange = (value) => {
-    if (value === 'custom') {
-      return setShowLeafIcon(<CheckOutlined />);
-    }
-    if (value === 'true') {
-      return setShowLeafIcon(true);
-    }
-    return setShowLeafIcon(false);
-  };
   return (
     <div>
       <Tree
-        showLine={
-          showLine
-            ? {
-                showLeafIcon,
-              }
-            : false
-        }
+        showLine={true}
         showIcon={showIcon}
         defaultExpandedKeys={['0-0-0']}
         onSelect={onSelect}
