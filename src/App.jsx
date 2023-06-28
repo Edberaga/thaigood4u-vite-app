@@ -9,6 +9,7 @@ import { auth } from './firebase';
 import Login from './components/login';
 import Header from './components/Header';
 import Register from './components/Register';
+import DefaultListData from './components/AffliateDefault/DefaultListData';
 
 function App() {
   const [user] = useAuthState(auth);
@@ -25,6 +26,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route >
             <Route path='/' element={<ListData/>}/>
+            <Route path='/default' element={<DefaultListData/>}/>
             <Route path='/register' element={<Register/>}/>
           </Route>
         </Routes>
