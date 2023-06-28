@@ -1,6 +1,7 @@
 import { CarryOutOutlined, CheckOutlined, FormOutlined } from '@ant-design/icons';
 import { Select, Switch, Tree } from 'antd';
 import { useState } from 'react';
+import DefaultListData from '../AffliateDefault/DefaultListData';
 
 
 const treeData = [
@@ -109,6 +110,10 @@ const ListData = () => {
         onSelect={onSelect}
         treeData={treeData}
       />
+      <h1>
+        Default: 
+      </h1>
+      <DefaultListData/>
     </div>
   );
 };
