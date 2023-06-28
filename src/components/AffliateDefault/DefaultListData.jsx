@@ -1,9 +1,9 @@
-import { CarryOutOutlined, CheckOutlined, FormOutlined } from '@ant-design/icons';
-import { Select, Switch, Tree } from 'antd';
+import { CarryOutOutlined, FormOutlined } from '@ant-design/icons';
+import { Tree } from 'antd';
 import { useState } from 'react';
 
 
-const treeData = [
+const defaultTreeData = [
   {
     title: 'Jackson034 (JACKSONTHAI9062023)',
     key: '0-0',
@@ -20,11 +20,7 @@ const treeData = [
             icon: <CarryOutOutlined />,
           },
           {
-            title: (
-              <>
-                <div>Thomson (THOMSON12302023)</div>
-              </>
-            ),
+            title: 'Thomson (THOMSON12302023)',
             key: '0-0-0-1',
             icon: <CarryOutOutlined />,
           },
@@ -102,12 +98,13 @@ const DefaultListData = () => {
   };
   return (
     <div>
+      <h2>Default Tree</h2>
       <Tree
         showLine={true}
-        showIcon={showIcon}
+        showIcon={true}
         defaultExpandedKeys={['0-0-0']}
         onSelect={onSelect}
-        treeData={treeData}
+        treeData={defaultTreeData}
       />
     </div>
   );
