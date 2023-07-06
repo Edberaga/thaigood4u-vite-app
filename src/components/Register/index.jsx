@@ -22,7 +22,8 @@ export default function Register() {
         displayName: data.username,
       });
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "team", res.user.uid), {
+      /*It's "users" NOT "user"... */
+      await setDoc(doc(db, "users", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
       });
@@ -35,7 +36,6 @@ export default function Register() {
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
-
     setData({...data, [id]:value});
   };
   console.log(data);
@@ -56,7 +56,7 @@ export default function Register() {
       <input 
         type="text"
         className='form-control'
-        placeholder='Enter your Name'
+        placeholder='Enter your User Name'
         id="username"
         onChange={handleInput}
       />
@@ -68,7 +68,7 @@ export default function Register() {
       <input 
         type="text"
         className='form-control'
-        placeholder='Enter your Email'
+        placeholder='Enter the User Email'
         id="email"
         onChange={handleInput}
       />
@@ -80,15 +80,14 @@ export default function Register() {
       <input 
         type="password"
         className='form-control'
-        placeholder='Write your Password'
-        id="password"
+        placeholder='Write the user Password'
         onChange={handleInput}
       />
     </div>
 
     {/*Invitation Code*/}
     <div className="form-group">
-      <label>Password</label>
+      <label>Invitation Code</label>
       <input 
         type="text"
         className='form-control'
@@ -100,11 +99,11 @@ export default function Register() {
 
     {/*Invited by Code*/}
     <div className="form-group">
-      <label>Password</label>
+      <label>Inviter Code</label>
       <input 
         type="text"
         className='form-control'
-        placeholder='Enter the Invitation Code of the Inviter'
+        placeholder='Enter the Invitation Code of the User Inviter'
         id="parentCode"
         onChange={handleInput}
       />
@@ -112,9 +111,10 @@ export default function Register() {
 
     {/*User Emblem*/}
     <div className="form-group">
-      <label htmlFor="role">Team</label>
+      <label htmlFor="role">Role</label>
       <select id="role" onChange={handleInput}>
         <option>Select the User Role</option>
+        <option value="None">None</option>
         <option value="Gold">Gold</option>
         <option value="Premium">Premium</option>
         <option value="Exclusive">Exclusive</option>
