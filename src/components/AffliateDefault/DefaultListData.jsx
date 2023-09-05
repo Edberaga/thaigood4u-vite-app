@@ -90,6 +90,7 @@ const defaultTreeData = [
 ];
 
 const DefaultListData = () => {
+  console.log(defaultTreeData);
   const [showLine, setShowLine] = useState(true);
   const [showIcon, setShowIcon] = useState(false);
   const [showLeafIcon, setShowLeafIcon] = useState(true);
