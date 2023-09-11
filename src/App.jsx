@@ -24,9 +24,9 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       {/*<Route element={<RequireAuth/>}> */}
       <Route>
-        <Route path='/' element={<RequireAuth><DefaultListData/></RequireAuth>}/>
-        <Route path='/default' element={<RequireAuth><DefaultListData/></RequireAuth> }/>
-        <Route path='/register' element={<RequireAuth><Register/></RequireAuth>}/>
+        <Route path='/' element={<DefaultListData/>}/>
+        <Route path='/default' element={<ListData/> }/>
+        <Route path='/register' element={<Register/>}/>
       </Route>
     </Routes>
   </main>
