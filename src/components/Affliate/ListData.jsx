@@ -32,7 +32,7 @@ let docArray = [
   },
 ];
 
-const buildTree = (theEmail, theKey, docArray) => {
+const BuildTree = (theEmail, theKey, docArray) => {
   let myNode = docArray.find(d => d.email === theEmail);
   if (!myNode) {
     throw new Error('No doc found for email:', theEmail);
@@ -42,22 +42,22 @@ const buildTree = (theEmail, theKey, docArray) => {
   let myChildren = docArray.filter(d => d.inviterCode === myCode);
 
   myNode.children = myChildren.map((child) =>
-    buildTree(child.email, theKey + '-0', docArray)
+    BuildTree(child.email, theKey + '-0', docArray)
   );
 
   return myNode;
 };
 
-let orderedTreeData = buildTree(myEmail, '0-0', docArray);
+let orderedTreeData = BuildTree(myEmail, '0-0', docArray);
 
-console.log(orderedTreeData);
+console.log("List: ", orderedTreeData);
 
 const ListData = () => {
   
   return (
-    <div>
-      
-    </div>
+    <>
+    
+    </>
   );
 };
 export default ListData;
