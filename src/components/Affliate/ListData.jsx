@@ -1,6 +1,7 @@
 import { CarryOutOutlined, FormOutlined } from '@ant-design/icons';
 import { Tree } from 'antd';
 import { useState } from 'react';
+import './ListData.css'
 
 let myEmail = 'jackson@gmail.com';
 
@@ -31,14 +32,12 @@ let docArray = [
   },
 ];
 
-var newNode = [];
-
 const BuildNewTree = (theEmail, theKey, docArray) => {
   let myNode = docArray.find(d => d.email === theEmail);
   if (!myNode) {
     throw new Error('No doc found for email:', theEmail);
   }
-
+  let newNode = []
   newNode.push({
     title: `${myNode.name} (${myNode.code})`,
     key: `${theKey}`,
@@ -48,9 +47,41 @@ const BuildNewTree = (theEmail, theKey, docArray) => {
   let myCode = myNode.code;
   let myChildren = docArray.filter(d => d.inviterCode === myCode);
 
-  newNode[0].children = myChildren.map((child) =>
-    BuildNewTree(child.email, theKey + '-0', docArray)
-  );
+  //Build child, (I hope this will deleted soon...)
+  const BuildChildTree = (theEmail, theKey, docArray) => {
+    let myNode = docArray.find(d => d.email === theEmail);
+    if (!myNode) {
+      throw new Error('No doc found for email:', theEmail);
+    }
+    
+    let newNode = {
+      title: `${myNode.name} (${myNode.code})`,
+      key: `${theKey}`,
+      icon: <CarryOutOutlined />,
+    };
+  
+    let myCode = myNode.code;
+    let myChildren = docArray.filter(d => d.inviterCode === myCode);
+    if(!myChildren) {
+      return newNode;
+    }
+    else {
+      newNode.children = myChildren.map((child) =>
+        BuildChildTree(child.email, theKey + '-0', docArray)
+      );
+    }
+    return newNode;
+  };
+  //Build child, (I hope this will deleted soon...)
+
+  if(!myChildren) {
+    return newNode;
+  }
+  else {
+    newNode[0].children = myChildren.map((child) =>
+      BuildChildTree(child.email, theKey + '-0', docArray)
+    );
+  }
 
   return newNode;
 };
@@ -64,7 +95,7 @@ console.log( newOrder);
 const ListData = () => {
   const [showLine, setShowLine] = useState(true);
   const [showIcon, setShowIcon] = useState(false);
-  const [showLeafIcon, setShowLeafIcon] = useState(true);
+  const [showLeafIcon, setShowLeafIcon] = useState(false);
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   };
