@@ -12,23 +12,24 @@ import DefaultListData from './components/AffliateDefault/DefaultListData';
 function App() {
   const [user] = useAuthState(auth);
 
-  const RequireAuth = ({children}) => {
-    return user ? (children) : <Navigate to="/login"/>
-  };
-
   return (
   <>
-  <Header/>
   <main className="App">
+  {
+    user ?
+    <>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<ListData/>}/>
+        <Route path='/default' element={<DefaultListData/> }/>
+        <Route path='/register' element={<Register/>}/>
+      </Routes>
+    </>
+    :
     <Routes>
       <Route path='/login' element={<Login/>}/>
-      {/*<Route element={<RequireAuth/>}> */}
-      <Route>
-        <Route path='/' element={<DefaultListData/>}/>
-        <Route path='/default' element={<ListData/> }/>
-        <Route path='/register' element={<Register/>}/>
-      </Route>
     </Routes>
+  }
   </main>
   </>
   )
