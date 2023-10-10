@@ -3,86 +3,32 @@ import { Tree } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase'
-import { doc, getDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { collection, getDocs, query } from 'firebase/firestore';
 import './ListData.css'
-
-
-let docArray = [
-  {
-    code: 'THAIJACKSON01',
-    email: 'jackson@gmail.com',
-    inviterCode: '',
-    name: 'Jackson',
-  },
-  {
-    code: 'THAIDAVID01',
-    email: 'david@gmail.com',
-    inviterCode: 'THAIANA01',
-    name: 'David',
-  },
-  {
-    code: 'THAIANA01',
-    email: 'ana@gmail.com',
-    inviterCode: 'THAIJACKSON01',
-    name: 'Ana',
-  },
-  {
-    code: 'THAIJERRY01',
-    email: 'jerry@gmail.com',
-    inviterCode: 'THAIANA01',
-    name: 'Jerry',
-  },
-];
 
 const ListData = () => {
   const [user] = useAuthState(auth);
-  //const [docArray, setDocArray] = useState([]);
 
   let myEmail = user.email;
   console.log("Email: ",user.email);
 
-  let docArray = [
-    {
-      code: 'THAIEDBERT01',
-      email: 'edbertjonnathan@gmail.com',
-      inviterCode: 'THAIKASEY01',
-      name: 'Edbert',
-    },
-    {
-      code: 'THAIDAVID01',
-      email: 'david@gmail.com',
-      inviterCode: 'THAIANA01',
-      name: 'David',
-    },
-    {
-      code: 'THAIANA01',
-      email: 'ana@gmail.com',
-      inviterCode: 'THAIJACKSON01',
-      name: 'Ana',
-    },
-    {
-      code: 'THAIJERRY01',
-      email: 'jerry@gmail.com',
-      inviterCode: 'THAIANA01',
-      name: 'Jerry',
-    },
-  ];
-  
+  const [data, setData] = useState([]);
 
-  /*
   useEffect(() => {
     const fetchData = async() => {
       let list = [];
       try{
-        const q = query(collection(db, "users"));
+        const q = query(
+          collection(db, "users")
+        );
         const querySnapshot = await getDocs(q);
 
         querySnapshot.forEach((doc) => {
           list.push({ id:doc.id, ...doc.data()});
+          // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
         });
-        setDocArray(list);
+        setData(list);
       }
       catch(error){
         console.log(error);
@@ -91,9 +37,8 @@ const ListData = () => {
     fetchData();
   },[]);
 
-  console.log("Array: ", docArray);
-  */
-
+  console.log("Doc: ", data);
+  
   const BuildNewTree = (theEmail, theKey, docArray) => {
     let myNode = docArray.find(d => d.email === theEmail);
     if (!myNode) {
@@ -144,14 +89,12 @@ const ListData = () => {
         BuildChildTree(child.email, theKey + '-0', docArray)
       );
     }
-  
     return newNode;
   };
   
-  let newOrder = BuildNewTree(myEmail, '0-0', docArray);
+  let newOrder = BuildNewTree(myEmail, '0-0', data);
   console.log( newOrder);
 
-  
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   };
