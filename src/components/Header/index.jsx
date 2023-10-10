@@ -40,8 +40,15 @@ const Header = () => {
   return (
     <>
     <header className="App-header" style={{textAlign: "center"}}>
+      <div>
+
+        <button onClick={logOut}>Logout</button>
+      </div>
+      <div>
         <h2>Thaigoo4u Affliate Program</h2>
         <h4>Sign up as: {data.name} </h4>
+      </div>
+      
     </header>
     </>
   )
