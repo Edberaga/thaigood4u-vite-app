@@ -24,9 +24,6 @@ const Header = () => {
     getUserData();
   },[]);
 
-  
-  console.log("Doc : ", data);
-
   const logOut = async() => {
     try{
       signOut(auth);
