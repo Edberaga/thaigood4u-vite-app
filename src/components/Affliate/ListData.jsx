@@ -8,38 +8,10 @@ import './ListData.css'
 
 const ListData = () => {
   const [user] = useAuthState(auth);
-
   let myEmail = user.email;
-  console.log("Email: ",user.email);
+  let data = [];
 
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async() => {
-      let list = [];
-      try{
-        const q = query(
-          collection(db, "users")
-        );
-        const querySnapshot = await getDocs(q);
-
-        querySnapshot.forEach((doc) => {
-          list.push({ id:doc.id, ...doc.data()});
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-        });
-        setData(list);
-      }
-      catch(error){
-        console.log(error);
-      }
-    };
-    fetchData();
-  },[]);
-
-  console.log("Doc: ", data);
-  
-  const BuildNewTree = (theEmail, theKey, docArray) => {
+  /*const BuildNewTree = (theEmail, theKey, docArray) => {
     let myNode = docArray.find(d => d.email === theEmail);
     if (!myNode) {
       throw new Error('No doc found for email:', theEmail);
@@ -91,9 +63,29 @@ const ListData = () => {
     }
     return newNode;
   };
-  
-  let newOrder = BuildNewTree(myEmail, '0-0', data);
-  console.log( newOrder);
+  */
+
+  const colRef = collection(db, "users");
+
+  const fetchData = () => {
+    getDocs(colRef).then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id})
+      })
+      console.log("Process doc: ", data);
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+  };
+
+  console.log("Doc: ", data);
+  console.log("Email: ",user.email);
+
+  fetchData();
+  //newOrder = BuildNewTree(myEmail, '0-0', data);
+
+  //console.log("New order", newOrder);
 
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
@@ -101,6 +93,7 @@ const ListData = () => {
   
   return (
     <div>
+      {/*
       <Tree
         showLine={true}
         showIcon={true}
@@ -108,6 +101,7 @@ const ListData = () => {
         onSelect={onSelect}
         treeData={newOrder}
       />
+  */}
     </div>
   );
 };
