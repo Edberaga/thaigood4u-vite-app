@@ -8,6 +8,7 @@ import './index.css';
 export default function Register() {
   const [data, setData] = useState({});
   let navigate = useNavigate();
+  const defaultPassword= "Saysheji5432";
 
   const handleRegister = async(e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ export default function Register() {
       const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        defaultPassword
       );
       updateProfile(auth.currentUser, {
         displayName: data.username,
@@ -37,8 +38,8 @@ export default function Register() {
     const id = e.target.id;
     const value = e.target.value;
     setData({...data, [id]:value});
+    console.log(data);
   };
-  console.log(data);
 
   return (
   <>
@@ -57,7 +58,7 @@ export default function Register() {
         type="text"
         className='form-control'
         placeholder='Enter your User Name'
-        id="username"
+        id="name"
         onChange={handleInput}
       />
     </div>
@@ -70,17 +71,6 @@ export default function Register() {
         className='form-control'
         placeholder='Enter the User Email'
         id="email"
-        onChange={handleInput}
-      />
-    </div>
-
-    {/*Password*/}
-    <div className="form-group">
-      <label>Password</label>
-      <input 
-        type="password"
-        className='form-control'
-        placeholder='Write the user Password'
         onChange={handleInput}
       />
     </div>
@@ -104,7 +94,7 @@ export default function Register() {
         type="text"
         className='form-control'
         placeholder='Enter the Invitation Code of the User Inviter'
-        id="parentCode"
+        id="inviterCode"
         onChange={handleInput}
       />
     </div>
