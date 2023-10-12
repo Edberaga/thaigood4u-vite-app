@@ -8,10 +8,12 @@ import './ListData.css'
 
 const ListData = () => {
   const [user] = useAuthState(auth);
-  let myEmail = user.email;
-  let data = [];
+  const myEmail = user.email;
+  const [data, setData] = useState(null);
 
-  /*const BuildNewTree = (theEmail, theKey, docArray) => {
+  const colRef = collection(db, "users");
+
+  const BuildNewTree = (theEmail, theKey, docArray) => {
     let myNode = docArray.find(d => d.email === theEmail);
     if (!myNode) {
       throw new Error('No doc found for email:', theEmail);
@@ -28,6 +30,7 @@ const ListData = () => {
   
     //Build child, (I hope this will deleted soon...)
     const BuildChildTree = (theEmail, theKey, docArray) => {
+      
       let myNode = docArray.find(d => d.email === theEmail);
       if (!myNode) {
         throw new Error('No doc found for email:', theEmail);
@@ -50,6 +53,7 @@ const ListData = () => {
         );
       }
       return newNode;
+      
     };
     //Build child, (I hope this will deleted soon...)
   
@@ -63,46 +67,52 @@ const ListData = () => {
     }
     return newNode;
   };
-  */
-
-  const colRef = collection(db, "users");
-
-  const fetchData = () => {
-    getDocs(colRef).then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        data.push({ ...doc.data(), id: doc.id})
+  
+  useEffect(() => {
+    const fetchData = () => {
+      let tempArray = [];
+      getDocs(colRef).then((snapshot) => {
+        console.log("Num of docs retrieved:", snapshot.size);
+        snapshot.docs.forEach((doc) => {
+          tempArray.push({ ...doc.data(), id: doc.id})
+        })
+        console.log("Update state with:", tempArray);
+        setData(tempArray);
       })
-      console.log("Process doc: ", data);
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
-  };
-
+      .catch(err => {
+        console.log("Uh-oh:", err.message);
+      })
+    };
+    fetchData();
+    
+  }, []);
+  
   console.log("Doc: ", data);
   console.log("Email: ",user.email);
-
-  fetchData();
-  //newOrder = BuildNewTree(myEmail, '0-0', data);
-
-  //console.log("New order", newOrder);
-
+  
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   };
-  
-  return (
-    <div>
-      {/*
-      <Tree
+
+  if (!data) {
+    return <div>Data is loading. . .</div>
+  } 
+  else {
+    let newOrder = BuildNewTree(myEmail, '0-0', data);
+    console.log("New order", newOrder);
+    
+    return (
+      <div>
+        <Tree
         showLine={true}
         showIcon={true}
         defaultExpandedKeys={['0-0-0']}
         onSelect={onSelect}
         treeData={newOrder}
       />
-  */}
-    </div>
-  );
+      </div>
+    );
+  }
 };
+
 export default ListData;
