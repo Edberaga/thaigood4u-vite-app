@@ -1,35 +1,30 @@
 import { useState } from 'react'
 import './App.css'
-import ListData from './components/Affliate/ListData'
-import { Navigate, Route, Router, Routes } from 'react-router-dom'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './firebase';
-import Login from './components/login';
+
+import { Route, Routes } from 'react-router-dom'
+
 import Header from './components/Header';
-import Register from './components/Register';
-import DefaultListData from './components/AffliateDefault/DefaultListData';
+import Register from './pages/Register';
+import Login from './pages/Login';
+
+/*Features Import */
+import ListData from './components/Affliate/ListData'
+import PrivateRoute from './components/PrivateRoute';
+import Home from './pages/Home';
 
 function App() {
-  const [user] = useAuthState(auth);
-
   return (
   <>
   <main className="App">
-  {
-    user ?
-    <>
-      <Header/>
-      <Routes>
-        <Route path='/' element={<ListData/>}/>
-        <Route path='/default' element={<DefaultListData/> }/>
-        <Route path='/register' element={<Register/>}/>
-      </Routes>
-    </>
-    :
+    <Header/>
     <Routes>
-      <Route path='/' element={<Login/>}/>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/register' element={<Register/>}/>
+      <Route path="/dashboard" element={<PrivateRoute />}>
+        <Route path='/dashboard/affliate-list'element={<ListData/>} />
+      </Route>
     </Routes>
-  }
   </main>
   </>
   )
