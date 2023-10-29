@@ -1,31 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase'
 import { doc, getDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Header = () => {
-  const [user] = useAuthState(auth);
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
+import './style.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-  useEffect(() => {
-    const getUserData = async() => {
-      try{
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        setData(docSnap.data());
-      }
-      catch(error){
-        console.log(error);
-      }
-    };
-    getUserData();
-  },[]);
+const Topbar = () => {
+  const [user, loading, error] = useAuthState(auth);
 
   const logOut = async() => {
-    try{
+    try {
       signOut(auth);
       navigate("/");
     }
@@ -34,20 +20,62 @@ const Header = () => {
     }
   }
 
-  return (
-    <>
-    <header className="App-header" style={{textAlign: "center"}}>
-      <div>
+  if(!user) {
+  return(
+    <section className='topbar'>
+      <section className='container'>
+        <ul>
+          <Link to='/login'><li>Login</li></Link>
+          <Link to='/register'><li>Register</li></Link>
+        </ul>
+      </section>
+    </section>
+  )}
 
-        <button onClick={logOut}>Logout</button>
-      </div>
+  if (loading) {
+    return (
       <div>
+        <p>Initialising User...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+  
+  if(user) {
+    return(
+      <section className='topbar'>
+        <section className='container'>
+        <ul>
+          <li>Hey, {user.displayName}</li>
+          <li onClick={logOut}>Logout</li>
+          <li style={{textAlign: 'left'}}>Dashboard</li>
+        </ul>
+        </section>  
+      </section>
+    )
+  }
+}
+
+const Header = () => {
+  const navigate = useNavigate();
+
+  return (
+  <>
+  <Topbar/>
+    <header className="App-header" style={{textAlign: "center"}}>
+      <div style={{fontFamily: "Cuvia, serif"}} >
         <h2>Thaigoo4u Affliate Program</h2>
-        <h4>Sign up as: {data.name} </h4>
       </div>
       
     </header>
-    </>
+  </>
   )
 }
 
