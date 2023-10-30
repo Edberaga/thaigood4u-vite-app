@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Topbar = () => {
   const [user, loading, error] = useAuthState(auth);
-
+  const navigate = useNavigate();
   const logOut = async() => {
     try {
       signOut(auth);
@@ -20,7 +20,26 @@ const Topbar = () => {
     }
   }
 
-  if(!user) {
+  if (loading) {
+    return (
+      <section className='topbar'>
+        <section className='container'>
+        </section>
+      </section>
+    );
+  }
+
+  else if (error) {
+    return (
+      <section className='topbar'>
+        <section className='container'>
+          Error... {error}
+        </section>
+      </section>
+    );
+  }
+
+  else if(!user) {
   return(
     <section className='topbar'>
       <section className='container'>
@@ -31,31 +50,15 @@ const Topbar = () => {
       </section>
     </section>
   )}
-
-  if (loading) {
-    return (
-      <div>
-        <p>Initialising User...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error}</p>
-      </div>
-    );
-  }
   
-  if(user) {
+  else {
     return(
       <section className='topbar'>
         <section className='container'>
         <ul>
           <li>Hey, {user.displayName}</li>
           <li onClick={logOut}>Logout</li>
-          <li style={{textAlign: 'left'}}>Dashboard</li>
+          <li style={{marginLeft: 'auto'}}>Dashboard</li>
         </ul>
         </section>  
       </section>
@@ -64,7 +67,6 @@ const Topbar = () => {
 }
 
 const Header = () => {
-  const navigate = useNavigate();
 
   return (
   <>
