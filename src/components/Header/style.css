@@ -5,11 +5,15 @@
   text-transform: uppercase;
 }
 
+.topbar ul{
+  display: flex;
+  font-size: 12px;
+}
+
 .topbar ul li {
-  display: inline-block;
+  list-style-type: none;
   cursor: pointer;
   margin-right: 25px;
-  font-size: 12px;
 }
 
 .topbar ul li a {
