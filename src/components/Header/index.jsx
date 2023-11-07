@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { auth, db } from '../../firebase'
-import { doc, getDoc } from 'firebase/firestore';
+import React from 'react'
+import { auth} from '../../firebase'
 import { signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
 import './style.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 const Topbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -13,6 +13,7 @@ const Topbar = () => {
   const logOut = async() => {
     try {
       signOut(auth);
+      toast.success(`User ${auth.currentUser.displayName} has Logged Out`);
       navigate("/");
     }
     catch(error) {
@@ -30,13 +31,7 @@ const Topbar = () => {
   }
 
   else if (error) {
-    return (
-      <section className='topbar'>
-        <section className='container'>
-          Error... {error}
-        </section>
-      </section>
-    );
+    toast.error(`Logging Error... ${error}`);
   }
 
   else if(!user) {
@@ -56,9 +51,9 @@ const Topbar = () => {
       <section className='topbar'>
         <section className='container'>
         <ul>
-          <li>Hey, {user.displayName}</li>
-          <li onClick={logOut}>Logout</li>
-          <li style={{marginLeft: 'auto'}}>Dashboard</li>
+          <Link><li>Hey, {user.displayName}</li></Link>
+          <Link><li onClick={logOut}>Logout</li></Link>
+          <Link to="/dashboard" style={{marginLeft: 'auto'}}><li >Dashboard</li></Link>
         </ul>
         </section>  
       </section>
