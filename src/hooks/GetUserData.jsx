@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
+import { getDoc } from 'firebase/firestore';
 
 export const GetUserData = () => {
   const user = auth.currentUser;
-    if (user !== null) {
-      // The user object has basic properties such as display name, email, etc.
-      const displayName = user.displayName;
-      const email = user.email;
-      const photoURL = user.photoURL;
-      const emailVerified = user.emailVerified;
-    
-      // The user's ID, unique to the Firebase project. Do NOT use
-      // this value to authenticate with your backend server, if
-      // you have one. Use User.getToken() instead.
-      const uid = user.uid;
+  const userData = getDoc(db, "users", user.uid);
+  if(user !== null) {
+    const loggedUser = {
+      role: userData.role,
+      name: user.displayName,
+      email: user.email,
+      img: userData.img,
+      isEngaged: userData.isEngaged
     }
-
-  return {displayName};
+    if(loggedUser.isEngaged === true) {
+      loggedUser.code = userData.code;
+      loggedUser.inviterCode = userData.inviterCode;
+    }
+    
+    console.log(user);
+    console.log(loggedUser);
+    
+    return loggedUser
+  }
 }
