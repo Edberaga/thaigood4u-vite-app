@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from '../../firebase';
 import "./login.css"
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [error, setError]  = useState(false);
@@ -17,6 +18,7 @@ const Login = () => {
     .then((userCredential) => {
       // Signed in 
       console.log(userCredential);
+      toast.success(`${userCredential.user.displayName} have been Logged In!`);
       navigate("/");
     })
     .catch((error) => {
