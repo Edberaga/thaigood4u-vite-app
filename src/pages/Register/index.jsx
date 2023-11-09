@@ -1,45 +1,80 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db} from '../../firebase';
 import './index.css';
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const [data, setData] = useState({});
+  const [valid, setValid] = useState(true);
+  const [validContent, setValidContent] = useState(null);
+
   let navigate = useNavigate();
   const defaultPassword= "Saysheji5432";
 
   const handleRegister = async(e) => {
     e.preventDefault();
-    try{
-      /*Add User to the Firebase Auth */
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        defaultPassword
-      );
-      updateProfile(auth.currentUser, {
-        displayName: data.username,
-      });
-      /*This will add the rest data, to the Firestore "User" doc*/
-      /*It's "users" NOT "user"... */
-      await setDoc(doc(db, "users", res.user.uid), {
-        ...data,
-        timeStamp: serverTimestamp(),
-      });
-      navigate(-1);
-    }catch(err){
-      console.log(err);
+    const docRef = doc(db, "affliate", data.inviterCode);
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()) {
+      setValid(true);
+      setValidContent(`${data.inviterCode} Code is Exists!`);
+    }
+    else {
+      setValid(false);
+      console.log(valid);
+    }
+
+    if(valid == "false") {
+      setValidContent(`Affliate Code is not founded...`);
+      toast.error("Affliate Code not found");
+    }
+    else {
+      try{
+        /*Add User to the Firebase Auth */
+        const res = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          defaultPassword
+        );
+        updateProfile(auth.currentUser, {
+          displayName: data.name,
+        });
+        /*This will add the rest data, to the Firestore "User" doc*/
+        /*It's "users" NOT "user"... */
+        await setDoc(doc(db, "users", res.user.uid), {
+          ...data,
+          timeStamp: serverTimestamp(),
+          isEngaged: false,
+        });
+        navigate(-1);
+      }catch(err){
+        console.log(err);
+      }
     }
   }
 
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
+    if(id == "inviterCode") {
+      value.toUpperCase();
+    }
     setData({...data, [id]:value});
     console.log(data);
   };
+
+  const handleInputCode = async (e) => {
+    const id = e.target.id;
+    const value = e.target.value.toUpperCase();
+    setData({...data, [id]:value});
+    console.log(data);
+
+    
+  }
 
   return (
   <>
@@ -97,6 +132,10 @@ export default function Register() {
         id="inviterCode"
         onChange={handleInput}
       />
+    </div>
+
+    <div className="validation">
+      <p>{validContent}</p>
     </div>
 
     {/*User Emblem*/}
