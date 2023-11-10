@@ -1,0 +1,54 @@
+@use 'base';
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: base.$text-font;
+  background-color: whitesmoke;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: base.$primary-font;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  line-height: 1.5em;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  line-height: 1.5em;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+  transition: 0.12s ease-in;
+}
+
+ul {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+.container {
+  box-sizing: border-box;
+  margin: 0 10vw;
+}
+
+/*Spinner Style */
+.spinner {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
