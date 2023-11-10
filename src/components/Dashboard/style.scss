@@ -1,0 +1,76 @@
+%dashboard-spacing {
+    border: 1px solid none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 10px 25px 10px;
+}
+
+.dashboard {
+    display: flex;
+    padding-top: 50px;
+
+    .main-dashboard {
+        flex: 2;
+        section{
+            display: flex;
+            align-items: center;
+            @extend %dashboard-spacing;
+            div {
+                margin: 0 15px;
+            }
+            p {
+                font-weight: 500;
+                span {
+                    font-weight: 400;
+                }
+            }
+        }
+        .profile-pic{
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+        a {
+            font-size: 12px;
+        }}
+        .profile-info {
+            .profile-unverified {
+            @extend %dashboard-spacing;
+            background-color: rgb(255, 246, 246);
+            height: 30vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            a {
+                display: block;
+                color: orange;
+            }
+            }
+        }
+    }
+
+    .setting-dashboard {
+        flex: 1;
+        section {
+            @extend %dashboard-spacing;
+        }
+        .account-setting {
+        h3{
+            padding: 10px;
+        }
+        div a{
+            display: flex;
+            padding: 10px 5px;
+            border-radius: 10px;
+            transition: 0.22s ease;
+        p {
+            margin-left: 10px;
+        }}
+        div a:hover {
+            background-color: rgb(244, 244, 244);
+            color: orange;
+        }
+    }}
+}
