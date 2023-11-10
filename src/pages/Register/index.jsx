@@ -16,17 +16,6 @@ export default function Register() {
 
   const handleRegister = async(e) => {
     e.preventDefault();
-    const docRef = doc(db, "affliate", data.inviterCode);
-    const docSnap = await getDoc(docRef);
-
-    if(docSnap.exists()) {
-      setValid(true);
-      setValidContent(`${data.inviterCode} Code is Exists!`);
-    }
-    else {
-      setValid(false);
-      console.log(valid);
-    }
 
     if(valid == "false") {
       setValidContent(`Affliate Code is not founded...`);
@@ -72,7 +61,18 @@ export default function Register() {
     const value = e.target.value.toUpperCase();
     setData({...data, [id]:value});
     console.log(data);
+    
+    const docRef = doc(db, "affliate", data.inviterCode);
+    const docSnap = await getDoc(docRef);
 
+    if(docSnap.exists()) {
+      setValid(true);
+      setValidContent(`${data.inviterCode} Code is Exists!`);
+    }
+    else {
+      setValid(false);
+      console.log(valid);
+    }
     
   }
 
