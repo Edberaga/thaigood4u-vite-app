@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Cuvia';
+  src: local('Cuvia'), url(./assets/fonts/Cunia.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: local('OpenSans'), url(./assets/fonts/OpenSans.ttf) format('truetype');
+}
+
+$primary-font: Cuvia, sans-serif;
+$text-font: OpenSans, sans-serif;
