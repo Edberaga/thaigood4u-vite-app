@@ -28,29 +28,28 @@ const Login = () => {
   }
 
   return (
-    <main className="content">
-      <section className='login-page'>
-        <form onSubmit={handleLogin} className='login-form'>
-            <input 
-              type="email" 
-              className='login-input' 
-              placeholder='youremail@saysheji.com' 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input 
-              type="password" 
-              className='login-input' 
-              placeholder='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit" className='login-submit'>Login</button>
-            {error && <span className="login-validation">Incorrect Email or Password!</span>}
-        </form>
-      </section>
-    </main>
-    
+  <main className="content">
+    <section className='login-page'>
+      <form onSubmit={handleLogin} className='login-form'>
+        <input 
+          type="email" 
+          className='login-input' 
+          placeholder='youremail@saysheji.com' 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input 
+          type="password" 
+          className='login-input' 
+          placeholder='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className='login-submit'>Login</button>
+        {error && <span className="login-validation">Incorrect Email or Password!</span>}
+      </form>
+    </section>
+  </main>
   )
 }
 
