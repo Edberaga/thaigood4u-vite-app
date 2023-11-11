@@ -8,5 +8,8 @@
   src: local('OpenSans'), url(./assets/fonts/OpenSans.ttf) format('truetype');
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,300&display=swap');
+
 $primary-font: Cuvia, sans-serif;
 $text-font: OpenSans, sans-serif;
+$button-text: 'Barlow', sans-serif;
