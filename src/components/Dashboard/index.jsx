@@ -121,17 +121,7 @@ return (
       })}
     </section>
 
-    <section className="affliate-setting">
-      <h3>Invite Friends</h3>
-      <div>
-        <p>Refer to a Friend.<br/> Then Get Reward Together! </p>
-      </div>
-      <Link to='./affliate'>  
-        <button>
-          Check My Affliate
-        </button>
-      </Link>
-    </section>
+    
   </section>
 </section>
 )
