@@ -6,6 +6,8 @@ import { accountSettingData } from '../../data/account-setting'
 import './style.scss'
 
 import NoImg from '../../assets/images/no-image.png'
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ShareIcon from '@mui/icons-material/Share';
 
 const Dashboard = () => {
 return (
@@ -110,15 +112,30 @@ return (
     <section className="account-setting">
       <h3>Account Setting</h3>
       {accountSettingData.map((par, index) => {
-        return (
-          <div key={index}>
-          <Link>
-            {par.icon}
-            <p>{par.name}</p>
-          </Link>
-        </div>
-        )
+      return (
+      <div key={index}>
+        <Link to={par.path}>
+          {par.icon}
+          <p>{par.name}</p>
+        </Link>
+      </div>
+      )
       })}
+      {/*
+      <div key="4">
+        <Link to="./invite-friends">
+        <GroupAddIcon/>
+        <p>Invite Friends</p>
+        </Link>
+      </div>
+      */}
+
+      <div key="4">
+        <Link to="./affliate">
+          <ShareIcon/>
+          <p>My Affliates</p>
+        </Link>
+      </div>
     </section>
 
     
