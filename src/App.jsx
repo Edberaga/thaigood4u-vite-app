@@ -6,10 +6,10 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 
 /*Features Import */
-import ListData from './components/Affliate/ListData'
 import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import Dashboard from './components/Dashboard';
+import Affliate from './components/Dashboard/Affliate';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       
       <Route path="/dashboard" element={<PrivateRoute />}>
         <Route path='/dashboard'element={<Dashboard/>} />
-        <Route path='/dashboard/affliate-list'element={<ListData/>} />
+        <Route path='/dashboard/affliate'element={<Affliate/>} />
       </Route>
     </Routes>
   </main>
