@@ -1,6 +1,7 @@
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 export const accountSettingData = [
     {
@@ -16,6 +17,11 @@ export const accountSettingData = [
     {
         name: "Customer Support",
         icon: <SupportAgentIcon />,
+        path: '/',
+    },
+    {
+        name: "Invite Friends",
+        icon: <GroupAddIcon />,
         path: '/',
     },
 ];
