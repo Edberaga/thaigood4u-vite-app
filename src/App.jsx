@@ -10,6 +10,8 @@ import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import Dashboard from './components/Dashboard';
 import Affliate from './components/Dashboard/Affliate';
+import Submission from './components/Dashboard/Submission';
+import Badges from './components/Dashboard/Badges';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       
       <Route path="/dashboard" element={<PrivateRoute />}>
         <Route path='/dashboard'element={<Dashboard/>} />
+        <Route path='/dashboard/submission'element={<Submission/>} />
+        <Route path='/dashboard/badges'element={<Badges/>} />
         <Route path='/dashboard/affliate'element={<Affliate/>} />
       </Route>
     </Routes>
