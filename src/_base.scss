@@ -13,3 +13,9 @@
 $primary-font: Cuvia, sans-serif;
 $text-font: OpenSans, sans-serif;
 $button-text: 'Barlow', sans-serif;
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
