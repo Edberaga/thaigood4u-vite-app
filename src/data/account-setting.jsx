@@ -19,9 +19,4 @@ export const accountSettingData = [
         icon: <SupportAgentIcon />,
         path: '/',
     },
-    {
-        name: "Invite Friends",
-        icon: <GroupAddIcon />,
-        path: '/',
-    },
 ];
