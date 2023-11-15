@@ -1,0 +1,46 @@
+@import "../../../base";
+
+%input-spaces{
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+
+%dashed-border {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23C3C3C3FF' stroke-width='10' stroke-dasharray='15%2c 15%2c 1' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+.form-container{
+    @extend %flex-center;
+    .image-display {
+        flex: 1;
+        padding: 15px;
+        height: 300px;
+        @extend %flex-center;
+        @extend %dashed-border;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    .proof-submission {
+        flex: 2;
+        display: flex;
+        justify-content: justify-center;
+        padding: 15px;
+        flex-flow: column wrap;
+        input[type="text"] {
+            @extend %input-spaces;
+        }
+
+        input:last-of-type::file-selector-button {
+            @extend %input-spaces;
+            margin-right: 10px;
+            padding: 12px 25px;
+            text-overflow: ellipsis;
+            font-family: $primary-font;
+            background-color: orange; 
+            border: 0;
+        }
+    }
+}
+
