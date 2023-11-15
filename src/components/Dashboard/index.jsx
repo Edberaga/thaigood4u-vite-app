@@ -2,14 +2,14 @@ import React from 'react'
 import { GetUserData } from '../../hooks/GetUserData'
 import userProfile from '../../assets/images/user-profile.png'
 import { Link } from 'react-router-dom'
-import { accountSettingData } from '../../data/account-setting'
+import { accountSettingData, memberSettingData, adminSettingData } from '../../data/AccountSetting'
 import './style.scss'
 
 import NoImg from '../../assets/images/no-image.png'
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import ShareIcon from '@mui/icons-material/Share';
+import { Badge } from '@mui/material'
 
 const Dashboard = () => {
+  const count = 1;
 return (
 <section className='dashboard container'>
 <section className='main-dashboard'>
@@ -21,7 +21,7 @@ return (
         <Link>Change Photo</Link>
     </div>
     <div>
-      <h3>Engaged Member</h3>
+      <h3>Admin</h3>
       <p>Name <span>Edbert</span></p>
       <p>Email <span>edbertjonnathan@gmail.com</span></p>
     </div>
@@ -98,46 +98,55 @@ return (
 
   <section className='setting-dashboard'>
     <section className="badges-display">
-      <h3>Badges</h3>
+      <h3>Recent Achievement</h3>
       <div>
-        <p>Member Have No Badges Currently.</p>
+        <p>No Achievement Currently, Click the "See More" and Make One!</p>
       </div>
       <Link to='./badges'>  
         <button>
-          Check All Badges
+          See More
         </button>
       </Link>
     </section>
     
     <section className="account-setting">
-      <h3>Account Setting</h3>
-      {accountSettingData.map((par, index) => {
-      return (
-      <div key={index}>
-        <Link to={par.path}>
-          {par.icon}
-          <p>{par.name}</p>
-        </Link>
-      </div>
-      )
-      })}
-      {/*
-      <div key="4">
-        <Link to="./invite-friends">
-        <GroupAddIcon/>
-        <p>Invite Friends</p>
-        </Link>
-      </div>
-      */}
-
-      <div key="4">
-        <Link to="./affliate">
-          <ShareIcon/>
-          <p>My Affliates</p>
-        </Link>
-      </div>
+    <h3>Account Setting</h3>
+    {accountSettingData.map((par, index) => {
+    return (
+    <div key={index}>
+      <Link to={par.path}>
+        {par.icon}
+        <p>{par.name}</p>
+      </Link>
+    </div>
+    )
+    })}
+    {/*
+    {memberSettingData.map((par, index) => {
+    return (
+    <div key={index}>
+      <Link to={par.path}>
+        {par.icon}
+        <p>{par.name}</p>
+      </Link>
+    </div>
+    )
+    })}
+    */}
+    
+    {adminSettingData.map((par, index) => {
+    return (
+    <div key={index}>
+      <Link to={par.path}>
+        <Badge color="warning" badgeContent={count}>
+        {par.icon}
+        </Badge>
+        <p>{par.name}</p>
+      </Link>
+    </div>
+    )
+    })}
     </section>
-
     
   </section>
 </section>
