@@ -24,10 +24,11 @@ function App() {
       <Route path='/register' element={<Register/>}/>
       
       <Route path="/dashboard" element={<PrivateRoute />}>
-        <Route path='/dashboard'element={<Dashboard/>} />
-        <Route path='/dashboard/submission'element={<Submission/>} />
-        <Route path='/dashboard/badges'element={<Badges/>} />
-        <Route path='/dashboard/affliate'element={<Affliate/>} />
+        <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/dashboard/submission' element={<Submission/>} />
+        <Route path='/dashboard/badges' element={<Badges/>} />
+        <Route path='/dashboard/affliate' element={<Affliate/>} />
+        <Route path='/dashboard/invite-friend' />
       </Route>
     </Routes>
   </main>
