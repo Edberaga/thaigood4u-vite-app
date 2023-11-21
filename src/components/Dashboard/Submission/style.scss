@@ -11,12 +11,16 @@
 
 .form-container{
     @extend %flex-center;
+    flex-wrap: wrap-reverse;
     .image-display {
         flex: 2;
         @extend %flex-center;
+        flex-wrap: wrap;
         div {
-            padding: 15px;
+            text-align: center;
             margin: 15px;
+        } .image-border{
+            padding: 15px;
             height: 300px;
             width: 300px;
             @extend %flex-center;
