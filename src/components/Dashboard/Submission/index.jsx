@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import noImage from '../../../assets/images/no-image.png'
 import './style.scss'
+import Submitted from './Submitted'
 
 const Submission = () => {
   const [receipt, setReceipt] = useState("");
@@ -63,20 +63,7 @@ const Submission = () => {
     </section>
     <hr/>
     
-    {/*Submission display */}
-    <section className="display-container">
-      <div className='display-box'>
-        <div className='display-proofs'>
-          <h3>Warkop Hau</h3>
-          <div className="display-images">
-            <img src={noImage} alt="Receipt Photo" />
-            <img src={noImage} alt="Selfie Photo" />
-          </div>
-          <p>24/07/1999</p>
-          <span>Submitted</span>
-        </div>
-      </div>
-    </section>
+    <Submitted/>
   </section>
   )
 }
