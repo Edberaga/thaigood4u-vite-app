@@ -7,7 +7,7 @@ const Submission = () => {
   const [selfie, setSelfie] = useState("");
 
   return (
-    <section className='container'>
+  <section className='container'>
     {/*Submission Form */}
     <section className="form-container">
       <div className="image-display">
@@ -62,11 +62,22 @@ const Submission = () => {
       </form>
     </section>
     <hr/>
+    
     {/*Submission display */}
-      <div className="display-container">
-        
+    <section className="display-container">
+      <div className='display-box'>
+        <div className='display-proofs'>
+          <h3>Warkop Hau</h3>
+          <div className="display-images">
+            <img src={noImage} alt="Receipt Photo" />
+            <img src={noImage} alt="Selfie Photo" />
+          </div>
+          <p>24/07/1999</p>
+          <span>Submitted</span>
+        </div>
       </div>
     </section>
+  </section>
   )
 }
 
