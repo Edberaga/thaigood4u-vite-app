@@ -39,7 +39,7 @@ const Submitted = () => {
         <img src={selfieImg} alt="Selfie Photo" />
       </div>
       <p>24/07/1999</p>
-      <span>Submitted</span>
+      <span style={{backgroundColor: 'green'}}>Approved</span>
     </div>
   </div>
 
