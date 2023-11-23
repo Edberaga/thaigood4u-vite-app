@@ -1,4 +1,5 @@
 @import "../../../base";
+@import "../style.scss";
 
 %input-spaces{
     margin: 5px 0 15px 0;
@@ -60,3 +61,23 @@
     }
 }
 
+.display-container {
+    @extend %flex-center;
+    .display-box {
+        padding: 10px;
+        @extend %dashboard-spacing;
+        .display-proofs{
+            text-align: center;
+            .display-images {
+                @extend %flex-center;
+                height: 200px;
+                width: 362px;
+                gap: 15px;
+                img{
+                    max-width: 50%;
+                    max-height: 100%;
+                }
+            }
+        }
+    }
+}
