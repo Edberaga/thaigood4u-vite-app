@@ -63,6 +63,7 @@
 
 .display-container {
     @extend %flex-center;
+    flex-wrap: wrap;
     .display-box {
         padding: 20px 10px;
         @extend %dashboard-spacing;
