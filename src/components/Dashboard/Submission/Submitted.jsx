@@ -1,48 +1,34 @@
-import React from 'react'
+import { useState } from 'react';
+import { submittedData } from './data'
+import ReactPaginate from 'react-paginate';
 
-import receiptImg from '../../../assets/images/OIP.jpeg'
-import selfieImg from '../../../assets/images/me.jpg'
+const SubmittedItem = () => {
+  return (
+  <>
+  {submittedData.map((par, index) => {
+    return(
+    <div key={index} className='display-box'>
+      <div className='display-proofs'>
+        <h3>{par.name}</h3>
+        <div className="display-images">
+          <img src={par.receiptImg} alt="Receipt Photo" />
+          <img src={par.selfieImg} alt="Selfie Photo" />
+        </div>
+        <p>{par.date}</p>
+        <span style={{backgroundColor: par.status === "Approved" ? "green" : "orange"}}>{par.status}</span>
+      </div>
+    </div>
+    )
+    })}
+  </>
+  )
+};
 
-const Submitted = () => {
+const Submitted = ({ itemsPerPage }) => {
+  
   return (
   <section className="display-container">
-
-  <div className='display-box'>
-    <div className='display-proofs'>
-      <h3>Warkop Hau</h3>
-      <div className="display-images">
-        <img src={receiptImg} alt="Receipt Photo" />
-        <img src={selfieImg} alt="Selfie Photo" />
-      </div>
-      <p>24/07/1999</p>
-      <span>Submitted</span>
-    </div>
-  </div>
-
-  <div className='display-box'>
-    <div className='display-proofs'>
-      <h3>Warkop Hau</h3>
-      <div className="display-images">
-        <img src={receiptImg} alt="Receipt Photo" />
-        <img src={selfieImg} alt="Selfie Photo" />
-      </div>
-      <p>24/07/1999</p>
-      <span>Submitted</span>
-    </div>
-  </div>
-
-  <div className='display-box'>
-    <div className='display-proofs'>
-      <h3>Warkop Hau</h3>
-      <div className="display-images">
-        <img src={receiptImg} alt="Receipt Photo" />
-        <img src={selfieImg} alt="Selfie Photo" />
-      </div>
-      <p>24/07/1999</p>
-      <span style={{backgroundColor: 'green'}}>Approved</span>
-    </div>
-  </div>
-
+    <SubmittedItem />
   </section>
   )
 }
