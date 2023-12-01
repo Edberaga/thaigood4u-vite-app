@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './style.scss'
 import Submitted from './Submitted'
 
@@ -37,33 +37,33 @@ const Submission = () => {
       </div>
 
       <form className='proof-submission' action="">
-        <label for='restaurant-name'>Restaurant Name</label>
-        <input type='text' id='travelName' required/>
+        <label htmlFor='travel-name'>Restaurant Name</label>
+        <input type='text' id='travel-name' required/>
 
-        <label for="photoUrl">Receipt Photo</label>
+        <label htmlFor="photoUrl">Receipt Photo</label>
         <input 
-            type="file" 
-            id='photoUrl'
-            size="60"
-            className='input-file'
-            onChange={(e) => setReceipt(e.target.files[0])}
-            required
+          type="file" 
+          id='photoUrl'
+          size="60"
+          className='input-file'
+          onChange={(e) => setReceipt(e.target.files[0])}
+          required
         />
         
-        <label for="selfieUrl">Selfie Photo</label>
+        <label htmlFor="selfieUrl">Selfie Photo</label>
         <input 
-            type="file" 
-            id='selfieUrl'
-            size="60"
-            onChange={(e) => setSelfie(e.target.files[0])}
-            required
+          type="file" 
+          id='selfieUrl'
+          size="60"
+          onChange={(e) => setSelfie(e.target.files[0])}
+          required
         />
         <button type="submit">Submit Photo</button>
       </form>
     </section>
     <hr/>
     
-    <Submitted/>
+    <Submitted itemsPerPage={3}/>
   </section>
   )
 }
